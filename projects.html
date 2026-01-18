@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projekte von Jonathan Walch - UI/UX Design Portfolio">
+    <title>Projekte | Jonathan Walch</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-text">JW</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html#about" class="nav-link">Über mich</a></li>
+                <li><a href="projects.html" class="nav-link active">Projekte</a></li>
+                <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
+            </ul>
+            <a href="assets/cv-jonathan-walch.pdf" download class="btn btn-primary nav-cta">
+                <span>CV Download</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+            </a>
+            <button class="hamburger" aria-label="Menü öffnen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Projects Hero -->
+    <section class="projects-hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="section-header centered">
+                <span class="section-tag">Portfolio</span>
+                <h1 class="page-title">Meine Projekte</h1>
+                <p class="page-subtitle">
+                    Eine Auswahl meiner Arbeiten aus Studium und persönlichen Projekten.
+                    Jedes Projekt erzählt eine Geschichte von Problemlösung und kreativem Denken.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-section">
+        <div class="container">
+            <!-- Coming Soon State -->
+            <div class="projects-coming-soon">
+                <div class="coming-soon-content">
+                    <div class="coming-soon-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h2>Projekte in Arbeit</h2>
+                    <p>
+                        Aktuell arbeite ich an spannenden Projekten im Rahmen meines Studiums.
+                        Schau bald wieder vorbei – hier werden meine Arbeiten präsentiert.
+                    </p>
+                    <div class="coming-soon-hint">
+                        <span class="hint-icon">💡</span>
+                        <span>In der Zwischenzeit kannst du mich gerne kontaktieren, um mehr über meine bisherigen Erfahrungen zu erfahren.</span>
+                    </div>
+                    <a href="index.html#contact" class="btn btn-primary">
+                        <span>Kontakt aufnehmen</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project Grid (for future projects) -->
+            <div class="projects-grid hidden">
+                <!-- Project Card Template -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="view-project">Projekt ansehen</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">UI Design</span>
+                            <span class="project-tag">Prototyping</span>
+                        </div>
+                        <h3 class="project-title">Projektname</h3>
+                        <p class="project-description">
+                            Kurze Beschreibung des Projekts und der Herausforderungen, die gelöst wurden.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="view-project">Projekt ansehen</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">UX Research</span>
+                            <span class="project-tag">App Design</span>
+                        </div>
+                        <h3 class="project-title">Projektname</h3>
+                        <p class="project-description">
+                            Kurze Beschreibung des Projekts und der Herausforderungen, die gelöst wurden.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <span class="view-project">Projekt ansehen</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="project-tag">Branding</span>
+                            <span class="project-tag">Web Design</span>
+                        </div>
+                        <h3 class="project-title">Projektname</h3>
+                        <p class="project-description">
+                            Kurze Beschreibung des Projekts und der Herausforderungen, die gelöst wurden.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interesse geweckt?</h2>
+                <p>Lass uns gemeinsam dein nächstes Projekt zum Leben erwecken.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="btn btn-primary">
+                        <span>Kontakt aufnehmen</span>
+                    </a>
+                    <a href="assets/cv-jonathan-walch.pdf" download class="btn btn-secondary">
+                        <span>CV herunterladen</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">JW</span>
+                    <p>UI/UX Designer aus Vorarlberg</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#about">Über mich</a>
+                    <a href="projects.html">Projekte</a>
+                    <a href="index.html#contact">Kontakt</a>
+                </div>
+                <p class="footer-copyright">© 2025 Jonathan Walch. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
