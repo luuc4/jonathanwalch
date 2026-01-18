@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSmoothScroll();
     initScrollAnimations();
+    updateActiveNavLink(); // Initial check
 });
 
 /**
@@ -15,19 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initNavbar() {
     const navbar = document.querySelector('.navbar');
-    let lastScrollY = window.scrollY;
+    if (!navbar) return;
+
     let ticking = false;
 
     const updateNavbar = () => {
-        const scrollY = window.scrollY;
-
-        if (scrollY > 50) {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-
-        lastScrollY = scrollY;
         ticking = false;
     };
 
@@ -38,7 +36,6 @@ function initNavbar() {
         }
     });
 
-    // Initial check
     updateNavbar();
 }
 
@@ -48,31 +45,48 @@ function initNavbar() {
 function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
 
     if (!hamburger || !navMenu) return;
 
+    const closeMenu = () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
     const toggleMenu = () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        const isOpen = navMenu.classList.contains('active');
+        if (isOpen) {
+            closeMenu();
+        } else {
+            hamburger.classList.add('active');
+            navMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     };
 
     hamburger.addEventListener('click', toggleMenu);
 
-    // Close menu when clicking a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
+    // Close menu when clicking a nav link
+    navMenu.addEventListener('click', (e) => {
+        if (e.target.classList.contains('nav-link')) {
+            closeMenu();
+        }
     });
 
     // Close menu on escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-            toggleMenu();
+            closeMenu();
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') &&
+            !navMenu.contains(e.target) &&
+            !hamburger.contains(e.target)) {
+            closeMenu();
         }
     });
 }
@@ -91,16 +105,95 @@ function initSmoothScroll() {
 
             e.preventDefault();
 
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const navbar = document.querySelector('.navbar');
+            const navbarHeight = navbar ? navbar.offsetHeight : 0;
             const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
 
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
+
+            // Manually set active state for the clicked link
+            setActiveNavLink(href);
         });
     });
 }
+
+/**
+ * Set active navigation link manually
+ */
+function setActiveNavLink(href) {
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href');
+        if (linkHref === href) {
+            link.classList.add('active');
+        }
+    });
+}
+
+/**
+ * Update active navigation link based on scroll position
+ */
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+
+    if (sections.length === 0) return;
+
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Check if we're at the bottom of the page (for contact section)
+    const isAtBottom = scrollY + windowHeight >= documentHeight - 50;
+
+    let currentSection = '';
+
+    if (isAtBottom) {
+        // If at bottom, activate contact if it exists
+        const contactSection = document.querySelector('#contact');
+        if (contactSection) {
+            currentSection = 'contact';
+        }
+    } else {
+        // Otherwise, find which section we're currently viewing
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navbarHeight - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+    }
+
+    // Update nav links
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href');
+
+        // Handle both #section and page.html#section formats
+        if (linkHref === `#${currentSection}` || linkHref.endsWith(`#${currentSection}`)) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Throttled scroll handler for active nav link
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    if (scrollTimeout) return;
+    scrollTimeout = setTimeout(() => {
+        updateActiveNavLink();
+        scrollTimeout = null;
+    }, 100);
+});
 
 /**
  * Scroll-triggered animations using Intersection Observer
@@ -144,21 +237,6 @@ function initScrollAnimations() {
 }
 
 /**
- * Utility: Debounce function
- */
-function debounce(func, wait = 100) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/**
  * Utility: Throttle function
  */
 function throttle(func, limit = 100) {
@@ -189,35 +267,6 @@ window.addEventListener('mousemove', throttle((e) => {
         orb.style.transform = `translate(${x}px, ${y}px)`;
     });
 }, 50));
-
-/**
- * Add active state to navigation based on scroll position
- */
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const navbarHeight = document.querySelector('.navbar').offsetHeight;
-
-        if (window.scrollY >= sectionTop - navbarHeight - 100) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-window.addEventListener('scroll', throttle(updateActiveNavLink, 100));
 
 /**
  * Console easter egg
