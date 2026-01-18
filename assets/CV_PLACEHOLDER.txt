@@ -1,0 +1,12 @@
+LEBENSLAUF PLATZHALTER
+======================
+
+Bitte ersetze diese Datei mit deinem tatsächlichen Lebenslauf.
+
+Benötigter Dateiname: cv-jonathan-walch.pdf
+
+Die Website erwartet den Lebenslauf unter:
+assets/cv-jonathan-walch.pdf
+
+Sobald du deine PDF-Datei hier ablegst, funktioniert der
+Download-Button in der Navigation automatisch.
