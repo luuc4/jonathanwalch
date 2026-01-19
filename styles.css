@@ -485,8 +485,10 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 400px;
     aspect-ratio: 3/4;
     margin: 0 auto;
-    /* Fix Chrome rendering */
-    transform: translateZ(0);
+    /* Clean Clip Fix */
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transform: translateZ(0); /* Keep for layer promotion */
 }
 
 /* Replaced Placeholder with Real Image Styling */
@@ -494,12 +496,9 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-xl);
-    transition: none; /* No transition on image itself needed anymore */
+    transition: none;
     
-    /* Chrome Rendering Fixes */
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    /* Chrome Rendering Fixes - Simplified */
     outline: 1px solid transparent;
 }
 
@@ -512,7 +511,6 @@ h1, h2, h3, h4, h5, h6 {
     mix-blend-mode: saturation;    /* Makes underlying image B/W */
     opacity: 1;
     transition: opacity 0.3s ease;
-    border-radius: var(--radius-xl);
     pointer-events: none;
 }
 
