@@ -485,10 +485,6 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 400px;
     aspect-ratio: 3/4;
     margin: 0 auto;
-    /* Clean Clip Fix */
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    transform: translateZ(0); /* Keep for layer promotion */
 }
 
 /* Replaced Placeholder with Real Image Styling */
@@ -496,22 +492,13 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: none;
-    
-    /* Chrome Rendering Fixes - Simplified */
-    outline: 1px solid transparent;
+    border-radius: var(--radius-xl);
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
 }
 
-/* Overlay Trick for Sharp Images in Chrome */
-.image-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--bg-primary); /* Dark overlay */
-    mix-blend-mode: saturation;    /* Makes underlying image B/W */
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+.image-wrapper:hover .hero-profile-img {
+    filter: grayscale(0%);
 }
 
 .image-wrapper:hover::after {
