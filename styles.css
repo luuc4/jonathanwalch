@@ -1430,6 +1430,7 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     border: 1px solid var(--border-color);
     transition: transform var(--transition-base);
+    cursor: none; /* Let custom cursor handle interactivity styling */
 }
 
 .gallery-item:hover {
@@ -1443,6 +1444,35 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+/* Gallery Overlays */
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-description {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.gallery-item:hover .gallery-description {
+    transform: translateY(0);
 }
 
 /* Aspect Ratio Handling */
