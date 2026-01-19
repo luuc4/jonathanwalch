@@ -495,18 +495,29 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     object-fit: cover;
     border-radius: var(--radius-xl);
-    filter: grayscale(20%);
-    transition: filter var(--transition-base);
+    transition: none; /* No transition on image itself needed anymore */
     
     /* Chrome Rendering Fixes */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    /* Force high quality rendering */
     outline: 1px solid transparent;
 }
 
-.image-wrapper:hover .hero-profile-img {
-    filter: grayscale(0%);
+/* Overlay Trick for Sharp Images in Chrome */
+.image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-primary); /* Dark overlay */
+    mix-blend-mode: saturation;    /* Makes underlying image B/W */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    border-radius: var(--radius-xl);
+    pointer-events: none;
+}
+
+.image-wrapper:hover::after {
+    opacity: 0; /* Reveal color on hover */
 }
 
 
