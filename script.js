@@ -4,12 +4,35 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initCustomCursor();
     initNavbar();
     initMobileMenu();
     initSmoothScroll();
+    handleInitialHash();
     initScrollAnimations();
     updateActiveNavLink(); // Initial check
 });
+
+/**
+ * Handle initial hash scroll on page load
+ */
+function handleInitialHash() {
+    if (window.location.hash) {
+        setTimeout(() => {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                const navbar = document.querySelector('.navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100); // Small delay to ensure layout is ready
+    }
+}
 
 /**
  * Navbar scroll effect
@@ -267,6 +290,41 @@ window.addEventListener('mousemove', throttle((e) => {
         orb.style.transform = `translate(${x}px, ${y}px)`;
     });
 }, 50));
+
+/**
+ * Custom Cursor Logic
+ */
+function initCustomCursor() {
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    if (!cursorDot || !cursorOutline) return;
+
+    window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Dot follows instantly
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        // Outline follows with slight delay (animation handled by CSS transition)
+        cursorOutline.style.left = `${posX}px`;
+        cursorOutline.style.top = `${posY}px`;
+    });
+
+    // Hover effect for links and buttons
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .detail-card, .skill-card');
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            document.body.classList.add('hovering');
+        });
+        el.addEventListener('mouseleave', () => {
+            document.body.classList.remove('hovering');
+        });
+    });
+}
 
 /**
  * Console easter egg

@@ -54,6 +54,14 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    cursor: none; /* Hide default cursor */
+}
+
+/* Fallback for devices without fine pointer */
+@media (pointer: coarse) {
+    html {
+        cursor: auto;
+    }
 }
 
 body {
@@ -64,6 +72,14 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    /* Page Transition */
+    opacity: 0;
+    animation: fadeInPage 0.5s ease forwards;
+}
+
+@keyframes fadeInPage {
+    to { opacity: 1; }
 }
 
 img {
@@ -76,6 +92,11 @@ a {
     text-decoration: none;
     color: inherit;
     transition: color var(--transition-fast);
+    cursor: none; /* Hide default cursor on links */
+}
+
+button {
+    cursor: none;
 }
 
 ul {
@@ -88,6 +109,47 @@ ul {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 24px;
+}
+
+/* ===================================
+   Custom Cursor
+   =================================== */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-primary);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--text-secondary);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Cursor Hover State (managed by JS) */
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(99, 102, 241, 0.1);
+    border-color: var(--accent-primary);
+}
+
+@media (pointer: coarse) {
+    .cursor-dot, .cursor-outline {
+        display: none;
+    }
 }
 
 /* ===================================
@@ -111,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-primary);
     font-size: 0.95rem;
     font-weight: 500;
-    cursor: pointer;
+    cursor: none; /* Custom cursor handling */
     border: none;
     transition: all var(--transition-base);
 }
@@ -240,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 5px;
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: none;
     padding: 8px;
     z-index: 1001;
 }
@@ -425,27 +487,20 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
 }
 
-.image-placeholder {
+/* Replaced Placeholder with Real Image Styling */
+.hero-profile-img {
     width: 100%;
     height: 100%;
-    background: var(--bg-tertiary);
-    border: 2px dashed var(--border-light);
+    object-fit: cover;
     border-radius: var(--radius-xl);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    color: var(--text-tertiary);
+    filter: grayscale(20%);
+    transition: filter var(--transition-base);
 }
 
-.image-placeholder svg {
-    opacity: 0.5;
+.image-wrapper:hover .hero-profile-img {
+    filter: grayscale(0%);
 }
 
-.image-placeholder span {
-    font-size: 0.875rem;
-}
 
 .image-decoration {
     position: absolute;
@@ -1303,4 +1358,116 @@ h1, h2, h3, h4, h5, h6 {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* ===================================
+   Project Case Studies (New)
+   =================================== */
+.project-case-study {
+    margin-bottom: 160px;
+    scroll-margin-top: 100px;
+}
+
+.case-study-header {
+    margin-bottom: 40px;
+    max-width: 800px;
+}
+
+.case-study-number {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--bg-tertiary);
+    line-height: 1;
+    margin-bottom: -20px;
+    margin-left: -4px;
+    opacity: 0.5;
+}
+
+.case-study-title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.case-study-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    padding: 6px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.case-study-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.case-study-description p {
+    margin-bottom: 16px;
+}
+
+/* Gallery Grid */
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: transform var(--transition-base);
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Aspect Ratio Handling */
+.format-hochkant {
+    aspect-ratio: 3/4;
+    grid-row: span 2;
+}
+
+.format-quer {
+    aspect-ratio: 16/9;
+    grid-column: span 2;
+}
+
+.format-quadr {
+    aspect-ratio: 1/1;
+}
+
+@media (max-width: 768px) {
+    .format-quer, .format-hochkant, .format-quadr {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        aspect-ratio: auto;
+    }
+    
+    .project-gallery {
+        grid-template-columns: 1fr;
+    }
 }

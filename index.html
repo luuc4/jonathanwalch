@@ -9,8 +9,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jonathanwalch.at/">
+    <meta property="og:title" content="Jonathan Walch | UI/UX Designer">
+    <meta property="og:description" content="Portfolio von Jonathan Walch - InterMedia Student & UI/UX Designer aus Vorarlberg.">
+    <meta property="og:image" content="assets/images/profile/Portrait.png">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -22,10 +36,10 @@
                 <li><a href="projects.html" class="nav-link">Projekte</a></li>
                 <li><a href="#contact" class="nav-link">Kontakt</a></li>
                 <li class="nav-menu-cta">
-                    <a href="assets/cv-jonathan-walch.pdf" download class="btn btn-primary">CV Download</a>
+                    <a href="assets/documents/cv-jonathan-walch.pdf" download class="btn btn-primary">CV Download</a>
                 </li>
             </ul>
-            <a href="assets/cv-jonathan-walch.pdf" download class="btn btn-primary nav-cta">
+            <a href="assets/documents/cv-jonathan-walch.pdf" download class="btn btn-primary nav-cta">
                 <span>CV Download</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -75,13 +89,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-wrapper">
-                    <div class="image-placeholder">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        <span>Bild folgt</span>
-                    </div>
+                    <img src="assets/images/profile/Portrait.png" alt="Jonathan Walch Portrait" class="hero-profile-img">
                     <div class="image-decoration"></div>
                 </div>
                 <div class="floating-card card-1">
@@ -259,7 +267,7 @@
                         Ich freue mich auf deine Nachricht.
                     </p>
                     <div class="contact-links">
-                        <a href="mailto:jonathan.walch@example.com" class="contact-link">
+                        <a href="mailto:jonathan.walch@hotmail.com" class="contact-link">
                             <div class="contact-icon">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -268,7 +276,7 @@
                             </div>
                             <div class="contact-info">
                                 <span class="contact-label">E-Mail</span>
-                                <span class="contact-value">jonathan.walch@example.com</span>
+                                <span class="contact-value">jonathan.walch@hotmail.com</span>
                             </div>
                         </a>
                         <a href="https://www.linkedin.com/in/jonathan-walch-38aaa41b8/" target="_blank" rel="noopener" class="contact-link">
@@ -304,7 +312,8 @@
                 <div class="footer-links">
                     <a href="#about">Über mich</a>
                     <a href="projects.html">Projekte</a>
-                    <a href="#contact">Kontakt</a>
+                    <a href="index.html#contact">Kontakt</a>
+                    <a href="impressum.html">Impressum</a>
                 </div>
                 <p class="footer-copyright">© 2025 Jonathan Walch. Alle Rechte vorbehalten.</p>
             </div>
