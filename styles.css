@@ -1501,3 +1501,54 @@ h1, h2, h3, h4, h5, h6 {
         grid-template-columns: 1fr;
     }
 }
+
+/* Impressum Fix */
+.legal-content {
+    padding-bottom: 80px;
+}
+
+/* Project 1 Specific Grid Logic */
+#project-1 .project-gallery {
+    grid-template-columns: repeat(3, 1fr); /* Force 3 columns on desktop */
+}
+
+/* Item 1 (Quer) */
+#project-1 .gallery-item:nth-child(1) {
+    grid-column: span 2;
+    aspect-ratio: 16/10;
+}
+
+/* Item 2 (Hoch - forced crop to match Item 1) */
+#project-1 .gallery-item:nth-child(2) {
+    grid-column: span 1;
+    aspect-ratio: 16/10; 
+}
+
+/* Items 3, 4, 5 (Row 2 - default to 1 col each, but match portrait aspect) */
+#project-1 .gallery-item:nth-child(3),
+#project-1 .gallery-item:nth-child(4),
+#project-1 .gallery-item:nth-child(5) {
+    aspect-ratio: 3/4;
+}
+
+/* Mobile Responsive Override for Project 1 */
+@media (max-width: 768px) {
+    #project-1 .project-gallery {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+
+    #project-1 .gallery-item:nth-child(1),
+    #project-1 .gallery-item:nth-child(2),
+    #project-1 .gallery-item:nth-child(3),
+    #project-1 .gallery-item:nth-child(4),
+    #project-1 .gallery-item:nth-child(5) {
+        grid-column: span 1;
+        aspect-ratio: auto; /* Allow natural height or set specific if needed */
+    }
+    
+    /* Ensure images look good on mobile stack */
+    #project-1 .gallery-item img {
+        height: auto;
+        min-height: 250px;
+    }
+}
