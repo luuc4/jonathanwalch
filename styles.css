@@ -485,6 +485,8 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 400px;
     aspect-ratio: 3/4;
     margin: 0 auto;
+    /* Fix Chrome rendering */
+    transform: translateZ(0);
 }
 
 /* Replaced Placeholder with Real Image Styling */
@@ -499,8 +501,8 @@ h1, h2, h3, h4, h5, h6 {
     /* Chrome Rendering Fixes */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
-    will-change: filter;
+    /* Force high quality rendering */
+    outline: 1px solid transparent;
 }
 
 .image-wrapper:hover .hero-profile-img {
